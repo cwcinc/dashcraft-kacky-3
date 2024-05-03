@@ -187,7 +187,11 @@ function getPositions(player) {
   }
   var html = "Total time: " + totals.time + "<br>Average position: " + totals.position / positions.length + "<br>"
   for (let i = 0; i < positions.length; i++) {
-    html += "<br><a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: " + numbers[positions[i].position - 1] + " place, " + (Math.round((positions[i].time - positions[i].wr) * 10000) / 10000) + " seconds away from world record"
+    html += "<br><a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: " + numbers[positions[i].position - 1] + " place ("
+    if (positions[i].position==1) {
+      html += "Holds world record)"
+    } else
+      html+=(Math.round((positions[i].time - positions[i].wr) * 10000) / 10000) + " seconds away from world record)"
   }
   return html
 }
