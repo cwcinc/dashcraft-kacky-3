@@ -53,7 +53,7 @@ function retrieveMaps() {
 }
 
 function getInfo(ID, isDone) {
-  document.getElementById("data").hidden=false
+  document.getElementById("data").hidden = false
   fetch("https://api.dashcraft.io/trackv2/" + ID + "?supportsLaps1=true", {
     headers: {
       'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWM0NmMzNGExYmEyMjQyNGYyZTAwMzIiLCJpbnRlbnQiOiJvQXV0aCIsImlhdCI6MTcwNzM3MTU3Mn0.0JVw6gJhs4R7bQGjr8cKGLE7CLAGvyuMiee7yvpsrWg'
@@ -88,6 +88,9 @@ function playerLookup() {
   var link = document.getElementById("profilelink")
   var lbdata = document.getElementById("lbdata")
   var track = document.getElementById("tracks")
+  link.innerHTML = ""
+  lbdata.innerHTML = ""
+  track.innerHTML = ""
   for (let i = 0; i < tracks.length; i++) {
     for (let j = 0; j < tracks[i].leaderboard.length; j++) {
       if ((tracks[i].leaderboard[j].user.username).includes(document.getElementById("player").value)) {
@@ -98,7 +101,7 @@ function playerLookup() {
     }
   }
   console.log(players)
-  link.innerHTML = ""
+  
   for (let i = 0; i < players.length; i++) {
     link.innerHTML += "<a href='https://dashcraft.io/?u=" + players[i]._id + "' target='_blank'>" + players[i].username + "</a><br>"
   }
@@ -153,20 +156,29 @@ function getTracks(player) {
       }
       document.getElementById("tracks").innerHTML += html
     });
-  
+
 }
 
 
 function getPositions(player) {
   var positions = [];
+  var totals = { time: 0, position: 0 }
   for (let i = 0; i < tracks.length; i++) {
     if (tracks[i].leaderboard.find(({ user }) => user._id === player._id)) {
       positions.push({ position: (tracks[i].leaderboard.findIndex(({ user }) => user._id === player._id) + 1), mapper: tracks[i].user.username, link: "https://dashcraft.io/?t=" + tracks[i]._id, wr: tracks[i].leaderboard[0].time, time: tracks[i].leaderboard.find(({ user }) => user._id === player._id).time });
+      totals.time += positions[positions.length - 1].time
+      totals.position += positions[positions.length - 1].position
     }
   }
   console.log(positions)
   positions.sort((a, b) => (b.time - b.wr) - (a.time - a.wr));
-  var html = ""
+  console.log(totals)
+  totals.time=Math.round(totals.time*10000)/10000
+  totals.position=Math.round(totals.position*100)/100
+  if (positions.length < tracks.length) {
+    totals.time += " (not top 10 on all tracks)"
+  }
+  var html = "Total time: " + totals.time + "<br>Average position: " + totals.position / positions.length + "<br><br>"
   for (let i = 0; i < positions.length; i++) {
     html += "<a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: " + numbers[positions[i].position - 1] + " place, " + (Math.round((positions[i].time - positions[i].wr) * 10000) / 10000) + " seconds away from world record<br>"
   }
