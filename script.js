@@ -41,46 +41,56 @@ function retrieveMaps() {
           IDarr.push(IDL[a][b]);
         }
       }
-      for (let j = 0; j < IDarr.length; j++) {
-        if (j == IDarr.length - 1) {
-          getInfo(IDarr[j], true)
-        } else {
-          getInfo(IDarr[j], false)
-        }
+      getInfo()
+    })
+}
 
+
+function getInfo() {
+  document.getElementById("data").hidden = false
+
+  var fetches = []
+  for (let i = 0; i < IDarr.length; i++) {
+    fetches.push(fetch("https://api.dashcraft.io/trackv2/" + IDarr[i] + "?supportsLaps1=true", {
+      headers: {
+        'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWM0NmMzNGExYmEyMjQyNGYyZTAwMzIiLCJpbnRlbnQiOiJvQXV0aCIsImlhdCI6MTcwNzM3MTU3Mn0.0JVw6gJhs4R7bQGjr8cKGLE7CLAGvyuMiee7yvpsrWg'
       }
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        return (json)
+      })
+    )
+  }
+  Promise.all(fetches)
+    .then((IDL) => {
+      console.log(IDL)
+      while (tracks.length > 0) {
+        tracks.pop();
+      }
+      for (let a = 0; a < IDL.length; a++) {
+        tracks.push(IDL[a]);
+      }
+      calculate()
 
 
     });
 }
 
-function getInfo(ID, isDone) {
-  document.getElementById("data").hidden = false
-  fetch("https://api.dashcraft.io/trackv2/" + ID + "?supportsLaps1=true", {
-    headers: {
-      'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWM0NmMzNGExYmEyMjQyNGYyZTAwMzIiLCJpbnRlbnQiOiJvQXV0aCIsImlhdCI6MTcwNzM3MTU3Mn0.0JVw6gJhs4R7bQGjr8cKGLE7CLAGvyuMiee7yvpsrWg'
-    }
-  })
-    .then((response) => response.json())
-    .then((json) => tracks.push(json))
-    .then(() => calculate(isDone));
-}
+function calculate() {
 
-function calculate(isDone) {
-  if (isDone) {
 
-    console.log(tracks)
+  console.log(tracks)
 
-    document.getElementById("players").innerHTML = "Players: " + Math.round(tracks.reduce((total, current) => total + current.leaderboardTotalCount, 0) / tracks.length);
-    document.getElementById("likes").innerHTML = "Likes: " + Math.round(tracks.reduce((total, current) => total + current.likesCount, 0) / tracks.length);
-    document.getElementById("dislikes").innerHTML = "Dislikes: " + Math.round(tracks.reduce((total, current) => total + current.dislikesCount, 0) / tracks.length);
+  document.getElementById("players").innerHTML = "Players: " + Math.round(tracks.reduce((total, current) => total + current.leaderboardTotalCount, 0) / tracks.length);
+  document.getElementById("likes").innerHTML = "Likes: " + Math.round(tracks.reduce((total, current) => total + current.likesCount, 0) / tracks.length);
+  document.getElementById("dislikes").innerHTML = "Dislikes: " + Math.round(tracks.reduce((total, current) => total + current.dislikesCount, 0) / tracks.length);
 
   document.getElementById("leaderboard").innerHTML += countPoints();
 
 
 
 
-  }
 }
 
 // player lookup
@@ -103,7 +113,7 @@ function playerLookup() {
     }
   }
   console.log(players)
-  
+
   for (let i = 0; i < players.length; i++) {
     link.innerHTML += "<a href='https://dashcraft.io/?u=" + players[i]._id + "' target='_blank'>" + players[i].username + "</a><br>"
   }
@@ -112,7 +122,7 @@ function playerLookup() {
   } else if (players.length == 0) {
     link.innerHTML = "No players found"
   }
-  if (players.length==1) {
+  if (players.length == 1) {
     track.innerHTML += "<h4>Tracks</h4>"
     getTracks(players[0])
     link.innerHTML += "Level " + players[0].levelData.level + " (" + players[0].levelData.xpInLevel + "/" + players[0].levelData.totalXpInLevel + ")"
@@ -180,18 +190,18 @@ function getPositions(player) {
   console.log(positions)
   positions.sort((a, b) => (b.time - b.wr) - (a.time - a.wr));
   console.log(totals)
-  totals.time=Math.round(totals.time*10000)/10000
-  totals.position=Math.round(totals.position*100)/100
+  totals.time = Math.round(totals.time * 10000) / 10000
+  totals.position = Math.round(totals.position * 100) / 100
   if (positions.length < tracks.length) {
     totals.time += " (not top 10 on all tracks)"
   }
   var html = "Total time: " + totals.time + "<br>Average position: " + totals.position / positions.length + "<br>"
   for (let i = 0; i < positions.length; i++) {
     html += "<br><a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: " + numbers[positions[i].position - 1] + " place ("
-    if (positions[i].position==1) {
+    if (positions[i].position == 1) {
       html += "Holds world record)"
     } else
-      html+=(Math.round((positions[i].time - positions[i].wr) * 10000) / 10000) + " seconds away from world record)"
+      html += (Math.round((positions[i].time - positions[i].wr) * 10000) / 10000) + " seconds away from world record)"
   }
   return html
 }
@@ -206,12 +216,12 @@ function countPoints() {
       }
     }
   }
-  
+
   points.sort((a, b) => b.points - a.points);
   console.log(points)
   var html = ""
   for (let i = 0; i < points.length; i++) {
-    points[i].points = Math.round(points[i].points*1000000/tracks.length)
+    points[i].points = Math.round(points[i].points * 1000000 / tracks.length)
     html += points[i].username + ": " + points[i].points + " points<br>"
   }
   return html
