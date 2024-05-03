@@ -11,8 +11,26 @@ body {
 hr {
   border: 5px solid black;
   border-radius: 5px;
+  width: 80%;
 }
 
 h2 {
   padding: 0%;
+}
+
+.lbdata {
+  float: left;
+  width: 50%;
+}
+.tracks {
+  float: left;
+  width: 50%;
+}
+.averages {
+  float: left;
+  width: 50%;
+}
+.leaderboard {
+  float: left;
+  width: 50%;
 }

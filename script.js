@@ -1,6 +1,8 @@
 const tracks = [];
 const IDarr = [];
 const numbers = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th"]
+const leagues = ["Bronze 1", "Bronze 2", "Bronze 3", "Silver 1", "Silver 2", "Silver 3", "Gold 1", "Gold 2", "Gold 3", "Diamond"]
+const points = []
 
 
 function retrieveMaps() {
@@ -73,7 +75,7 @@ function calculate(isDone) {
     document.getElementById("likes").innerHTML = "Likes: " + Math.round(tracks.reduce((total, current) => total + current.likesCount, 0) / tracks.length);
     document.getElementById("dislikes").innerHTML = "Dislikes: " + Math.round(tracks.reduce((total, current) => total + current.dislikesCount, 0) / tracks.length);
 
-
+  document.getElementById("leaderboard").innerHTML += countPoints();
 
 
 
@@ -81,7 +83,7 @@ function calculate(isDone) {
   }
 }
 
-
+// player lookup
 function playerLookup() {
   var players = []
   var playerlookup = document.getElementById("playerlookup")
@@ -106,7 +108,7 @@ function playerLookup() {
     link.innerHTML += "<a href='https://dashcraft.io/?u=" + players[i]._id + "' target='_blank'>" + players[i].username + "</a><br>"
   }
   if (players.length > 1) {
-    playerlookup.innerHTML += "More than one player found so advanced data is not displayed"
+    track.innerHTML += "More than one player found so advanced data is not displayed"
   } else if (players.length == 0) {
     link.innerHTML = "No players found"
   }
@@ -114,14 +116,17 @@ function playerLookup() {
     track.innerHTML += "<h4>Tracks</h4>"
     getTracks(players[0])
     link.innerHTML += "Level " + players[0].levelData.level + " (" + players[0].levelData.xpInLevel + "/" + players[0].levelData.totalXpInLevel + ")"
+    link.innerHTML += "<br>" + leagues[players[0].leagueNr]
   }
   if (!document.getElementById("checkbox").checked) {
-    playerlookup.innerHTML += "<br>Leaderboard info not shown on global leaderboard"
+    lbdata.innerHTML += "<br>Leaderboard info not shown on global leaderboard"
   } else if (players.length == 1) {
     lbdata.innerHTML += "<h4>Leaderboard Data</h4>"
     lbdata.innerHTML += getPositions(players[0])
   }
 }
+
+
 
 function getTracks(player) {
   var fetches = [];
@@ -183,6 +188,27 @@ function getPositions(player) {
   var html = "Total time: " + totals.time + "<br>Average position: " + totals.position / positions.length + "<br>"
   for (let i = 0; i < positions.length; i++) {
     html += "<br><a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: " + numbers[positions[i].position - 1] + " place, " + (Math.round((positions[i].time - positions[i].wr) * 10000) / 10000) + " seconds away from world record"
+  }
+  return html
+}
+
+function countPoints() {
+  for (let i = 0; i < tracks.length; i++) {
+    for (let j = 0; j < tracks[i].leaderboard.length; j++) {
+      if (points.find(({ username }) => username === tracks[i].leaderboard[j].user.username) != undefined) {
+        points.find(({ username }) => username === tracks[i].leaderboard[j].user.username).points += (1 / (j + 1));
+      } else {
+        points.push({ username: tracks[i].leaderboard[j].user.username, points: (1 / (j + 1)) });
+      }
+    }
+  }
+  
+  points.sort((a, b) => b.points - a.points);
+  console.log(points)
+  var html = ""
+  for (let i = 0; i < points.length; i++) {
+    points[i].points = Math.round(points[i].points*1000000/tracks.length)
+    html += points[i].username + ": " + points[i].points + " points<br>"
   }
   return html
 }
