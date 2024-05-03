@@ -185,6 +185,8 @@ function getPositions(player) {
       positions.push({ position: (tracks[i].leaderboard.findIndex(({ user }) => user._id === player._id) + 1), mapper: tracks[i].user.username, link: "https://dashcraft.io/?t=" + tracks[i]._id, wr: tracks[i].leaderboard[0].time, time: tracks[i].leaderboard.find(({ user }) => user._id === player._id).time });
       totals.time += positions[positions.length - 1].time
       totals.position += positions[positions.length - 1].position
+    } else {
+      positions.push({ position: "N/A", mapper: tracks[i].user.username, link: "https://dashcraft.io/?t=" + tracks[i]._id, wr: tracks[i].leaderboard[0].time, time: 100000 })
     }
   }
   console.log(positions)
@@ -192,16 +194,20 @@ function getPositions(player) {
   console.log(totals)
   totals.time = Math.round(totals.time * 10000) / 10000
   totals.position = Math.round(totals.position * 100) / 100
-  if (positions.length < tracks.length) {
+  if (positions.find(({ time }) => time === "N/A")) {
     totals.time += " (not top 10 on all tracks)"
   }
   var html = "Total time: " + totals.time + "<br>Average position: " + totals.position / positions.length + "<br>"
   for (let i = 0; i < positions.length; i++) {
-    html += "<br><a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: " + numbers[positions[i].position - 1] + " place ("
-    if (positions[i].position == 1) {
-      html += "Holds world record)"
-    } else
-      html += (Math.round((positions[i].time - positions[i].wr) * 10000) / 10000) + " seconds away from world record)"
+    if (positions[i].position == "N/A") {
+      html += "<br><a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: Not top 10"
+    } else {
+      html += "<br><a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: " + numbers[positions[i].position - 1] + " place ("
+      if (positions[i].position == 1) {
+        html += "Holds world record)"
+      } else
+        html += (Math.round((positions[i].time - positions[i].wr) * 10000) / 10000) + " seconds away from world record)"
+    }
   }
   return html
 }
