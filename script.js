@@ -118,7 +118,7 @@ function playerLookup() {
     link.innerHTML += "<a href='https://dashcraft.io/?u=" + players[i]._id + "' target='_blank'>" + players[i].username + "</a><br>"
   }
   if (players.length > 1) {
-    track.innerHTML += "More than one player found so advanced data is not displayed"
+    link.innerHTML += "More than one player found so advanced data is not displayed"
   } else if (players.length == 0) {
     link.innerHTML = "No players found"
   }
@@ -129,7 +129,7 @@ function playerLookup() {
     link.innerHTML += "<br>" + leagues[players[0].leagueNr]
   }
   if (!document.getElementById("checkbox").checked) {
-    lbdata.innerHTML += "<br>Leaderboard info not shown on global leaderboard"
+    lbdata.innerHTML += "<br><h4>Leaderboard Data</h4><br>Leaderboard info not shown on global leaderboard"
   } else if (players.length == 1) {
     lbdata.innerHTML += "<h4>Leaderboard Data</h4>"
     lbdata.innerHTML += getPositions(players[0])

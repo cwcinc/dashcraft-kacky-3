@@ -9,36 +9,43 @@
 </head>
 
 <body>
-  
-  <button type="button" onclick="retrieveMaps()">Get Info</button>
-  <input id="checkbox" type="checkbox" checked=true>
-  Verified Only
+  <div class="topstuff">
+    <button type="button" onclick="retrieveMaps()">Get Info</button>
+    <label class="container"> Verified Only
+      <input id="checkbox" type="checkbox" checked=true>
+      <span class="checkmark"></span>
+    </label>
+  </div>
   <hr>
-  
+
   <div id="data" hidden>
-    <div id="averages", class="averages">
+    <div id="averages" , class="averages">
       <h2>Averages</h2>
-        <div id="players">Players:</div>
-        <div id="likes">Likes:</div>
-        <div id="dislikes">Dislikes:</div>
+      <div id="players">Players:</div>
+      <div id="likes">Likes:</div>
+      <div id="dislikes">Dislikes:</div>
     </div>
 
-    <div id="leaderboard", class="leaderboard">
+    <div id="leaderboard" , class="leaderboard">
       <h2>Leaderboard</h2>
     </div>
-    
-    <br><hr>
-    
+
+    <br>
+    <hr>
+
     <div id="playerlookup">
       <h2>Player Lookup</h2>
-      <input id="player" type="text">
-      <button type="button" onclick="playerLookup()">Find Player</button><br>
+      <div class="topstuff">
+        <input id="player" type="text">
+        <button type="button" onclick="playerLookup()">Find Player</button><br><br>
+      </div>
       <div id="profilelink"></div>
       <div id="lbdata" class="lbdata"></div>
       <div id="tracks" class="tracks"></div>
     </div>
-    
-    <br><hr>
+
+    <br>
+    <hr>
   </div>
 
 
