@@ -13,26 +13,29 @@
   <input id="checkbox" type="checkbox">
   Verified Only
 
-  <div id="averages">
-    <h2>Averages</h2>
-    <ul>
-      <li id="players">Players: 
-      <li id="likes">Likes: 
-      <li id="dislikes">Dislikes: 
-    </ul>
+  <div id="data" hidden>
+    <div id="averages">
+      <h2>Averages</h2>
+      <ul>
+        <li id="players">Players:
+        <li id="likes">Likes:
+        <li id="dislikes">Dislikes:
+      </ul>
+    </div>
+
+    <div id="playerlookup">
+      <h2>Player Lookup</h2>
+      <input id="player" type="text">
+      <button type="button" onclick="playerLookup()">Find Player</button><br>
+      <div id="profilelink"></div>
+      <div id="lbdata"></div>
+      <div id="tracks"></div>
+    </div>
   </div>
 
-  <div id="playerlookup">
-    <h2>Player Lookup</h2>
-    <input id="player" type="text">
-    <button type="button" onclick="playerLookup()">Find Player</button><br>
-    <div id = "profilelink"></div>
-    <div id = "lbdata"></div>
-    <div id = "tracks"></div>
-  </div>
 
-  
-  <script src="script.js"></script>  <br><br><h6>API stuff stolen from LovelyLagrande (im too stupid to make my own)</h6>
+  <script src="script.js"></script> <br><br>
+  <h6>API stuff stolen from LovelyLagrande (im too stupid to make my own)</h6>
 </body>
 
 </html>

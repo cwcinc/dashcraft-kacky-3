@@ -53,6 +53,7 @@ function retrieveMaps() {
 }
 
 function getInfo(ID, isDone) {
+  document.getElementById("data").hidden=false
   fetch("https://api.dashcraft.io/trackv2/" + ID + "?supportsLaps1=true", {
     headers: {
       'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWM0NmMzNGExYmEyMjQyNGYyZTAwMzIiLCJpbnRlbnQiOiJvQXV0aCIsImlhdCI6MTcwNzM3MTU3Mn0.0JVw6gJhs4R7bQGjr8cKGLE7CLAGvyuMiee7yvpsrWg'
