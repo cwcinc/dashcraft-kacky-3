@@ -110,14 +110,16 @@ function playerLookup() {
   } else if (players.length == 0) {
     link.innerHTML = "No players found"
   }
+  if (players.length==1) {
+    track.innerHTML += "<h4>Tracks</h4>"
+    getTracks(players[0])
+    link.innerHTML += "Level " + players[0].levelData.level + " (" + players[0].levelData.xpInLevel + "/" + players[0].levelData.totalXpInLevel + ")"
+  }
   if (!document.getElementById("checkbox").checked) {
     playerlookup.innerHTML += "<br>Leaderboard info not shown on global leaderboard"
   } else if (players.length == 1) {
-    lbdata.innerHTML += "<br><h4>Leaderboard Data</h4>"
+    lbdata.innerHTML += "<h4>Leaderboard Data</h4>"
     lbdata.innerHTML += getPositions(players[0])
-    track.innerHTML += "<br><h4>Tracks</h4>"
-    getTracks(players[0])
-
   }
 }
 
@@ -178,9 +180,9 @@ function getPositions(player) {
   if (positions.length < tracks.length) {
     totals.time += " (not top 10 on all tracks)"
   }
-  var html = "Total time: " + totals.time + "<br>Average position: " + totals.position / positions.length + "<br><br>"
+  var html = "Total time: " + totals.time + "<br>Average position: " + totals.position / positions.length + "<br>"
   for (let i = 0; i < positions.length; i++) {
-    html += "<a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: " + numbers[positions[i].position - 1] + " place, " + (Math.round((positions[i].time - positions[i].wr) * 10000) / 10000) + " seconds away from world record<br>"
+    html += "<br><a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: " + numbers[positions[i].position - 1] + " place, " + (Math.round((positions[i].time - positions[i].wr) * 10000) / 10000) + " seconds away from world record"
   }
   return html
 }
