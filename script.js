@@ -179,12 +179,13 @@ function getTracks(player) {
 
 function getPositions(player) {
   var positions = [];
-  var totals = { time: 0, position: 0 }
+  var totals = { time: 0, position: 0, tracks: 0 }
   for (let i = 0; i < tracks.length; i++) {
     if (tracks[i].leaderboard.find(({ user }) => user._id === player._id)) {
       positions.push({ position: (tracks[i].leaderboard.findIndex(({ user }) => user._id === player._id) + 1), mapper: tracks[i].user.username, link: "https://dashcraft.io/?t=" + tracks[i]._id, wr: tracks[i].leaderboard[0].time, time: tracks[i].leaderboard.find(({ user }) => user._id === player._id).time });
       totals.time += positions[positions.length - 1].time
       totals.position += positions[positions.length - 1].position
+      totals.tracks += 1
     } else {
       positions.push({ position: "N/A", mapper: tracks[i].user.username, link: "https://dashcraft.io/?t=" + tracks[i]._id, wr: tracks[i].leaderboard[0].time, time: 100000 })
     }
@@ -194,10 +195,10 @@ function getPositions(player) {
   console.log(totals)
   totals.time = Math.round(totals.time * 10000) / 10000
   totals.position = Math.round(totals.position * 100) / 100
-  if (positions.find(({ time }) => time === "N/A")) {
+  if (positions.find(({ position }) => position === "N/A")) {
     totals.time += " (not top 10 on all tracks)"
   }
-  var html = "Total time: " + totals.time + "<br>Average position: " + totals.position / positions.length + "<br>"
+  var html = "Total time: " + totals.time + "<br>Average position: " + totals.position / totals.tracks + "<br>"
   for (let i = 0; i < positions.length; i++) {
     if (positions[i].position == "N/A") {
       html += "<br><a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: Not top 10"
