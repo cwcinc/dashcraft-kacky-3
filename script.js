@@ -1,5 +1,5 @@
 const tracks = [];
-const IDarr = [];
+const IDarr = ["65ac62b6bfde41e9d30919dc", "65ac5563bfde41e9d3090753", "65e381918fb6a718f9a9410a", "65f7a5d07bb0068befad371d", "65f7aed67bb0068befad413b", "65f7d7557bb0068befad8562", "65fe36fbd624bd26b4d39528", "65f860427bb0068befaf06f7", "65f869ed7bb0068befaf252e", "65f88ec47bb0068befaf95cc", "65ff075dd624bd26b4d59937", "65f7b8047bb0068befad4f9c", "65f8a1857bb0068befafcabd", "65f905f77bb0068befb0a4ca", "65f9fb137bb0068befb39a83", "65fa1fcc7bb0068befb3e8fd", "65fa23e37bb0068befb3f093", "65fcf765d624bd26b4ce7381", "65fcf5bed624bd26b4ce7165", "65fdc9f1d624bd26b4d24e1b"];
 const numbers = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th"]
 const leagues = ["Bronze 1", "Bronze 2", "Bronze 3", "Silver 1", "Silver 2", "Silver 3", "Gold 1", "Gold 2", "Gold 3", "Diamond"]
 const points = []
@@ -82,9 +82,7 @@ function calculate() {
 
   console.log(tracks)
 
-  document.getElementById("players").innerHTML = "Players: " + Math.round(tracks.reduce((total, current) => total + current.leaderboardTotalCount, 0) / tracks.length);
-  document.getElementById("likes").innerHTML = "Likes: " + Math.round(tracks.reduce((total, current) => total + current.likesCount, 0) / tracks.length);
-  document.getElementById("dislikes").innerHTML = "Dislikes: " + Math.round(tracks.reduce((total, current) => total + current.dislikesCount, 0) / tracks.length);
+
 
   document.getElementById("leaderboard").innerHTML += countPoints();
 
@@ -99,10 +97,8 @@ function playerLookup() {
   var playerlookup = document.getElementById("playerlookup")
   var link = document.getElementById("profilelink")
   var lbdata = document.getElementById("lbdata")
-  var track = document.getElementById("tracks")
   link.innerHTML = ""
   lbdata.innerHTML = ""
-  track.innerHTML = ""
   for (let i = 0; i < tracks.length; i++) {
     for (let j = 0; j < tracks[i].leaderboard.length; j++) {
       if ((tracks[i].leaderboard[j].user.username).includes(document.getElementById("player").value)) {
@@ -123,12 +119,11 @@ function playerLookup() {
     link.innerHTML = "No players found"
   }
   if (players.length == 1) {
-    track.innerHTML += "<h4>Tracks</h4>"
-    getTracks(players[0])
+    
     link.innerHTML += "Level " + players[0].levelData.level + " (" + players[0].levelData.xpInLevel + "/" + players[0].levelData.totalXpInLevel + ")"
     link.innerHTML += "<br>" + leagues[players[0].leagueNr]
   }
-  if (!document.getElementById("checkbox").checked) {
+  if (false) {
     lbdata.innerHTML += "<br><h4>Leaderboard Data</h4><br>Leaderboard info not shown on global leaderboard"
   } else if (players.length == 1) {
     lbdata.innerHTML += "<h4>Leaderboard Data</h4>"
@@ -187,7 +182,11 @@ function getPositions(player) {
       totals.position += positions[positions.length - 1].position
       totals.tracks += 1
     } else {
-      positions.push({ position: "N/A", mapper: tracks[i].user.username, link: "https://dashcraft.io/?t=" + tracks[i]._id, wr: tracks[i].leaderboard[0].time, time: 100000 })
+      if (tracks[i].leaderboard.length > 0) {
+        positions.push({ position: "N/A", mapper: tracks[i].user.username, link: "https://dashcraft.io/?t=" + tracks[i]._id, wr: tracks[i].leaderboard[0].time, time: 100000 })
+      } else {
+        
+      }
     }
   }
   console.log(positions)
@@ -217,9 +216,9 @@ function countPoints() {
   for (let i = 0; i < tracks.length; i++) {
     for (let j = 0; j < tracks[i].leaderboard.length; j++) {
       if (points.find(({ username }) => username === tracks[i].leaderboard[j].user.username) != undefined) {
-        points.find(({ username }) => username === tracks[i].leaderboard[j].user.username).points += (1 / (j + 1));
+        points.find(({ username }) => username === tracks[i].leaderboard[j].user.username).points += (1);
       } else {
-        points.push({ username: tracks[i].leaderboard[j].user.username, points: (1 / (j + 1)) });
+        points.push({ username: tracks[i].leaderboard[j].user.username, points: (1) });
       }
     }
   }
@@ -228,7 +227,6 @@ function countPoints() {
   console.log(points)
   var html = ""
   for (let i = 0; i < points.length; i++) {
-    points[i].points = Math.round(points[i].points * 1000000 / tracks.length)
     html += points[i].username + ": " + points[i].points + " points<br>"
   }
   return html

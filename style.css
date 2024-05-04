@@ -19,20 +19,10 @@ h2 {
 }
 
 .lbdata {
-  float: left;
-  width: 50%;
-}
-.tracks {
-  float: left;
-  width: 50%;
-}
-.averages {
-  float: left;
-  width: 50%;
+  float: center;
 }
 .leaderboard {
-  float: left;
-  width: 50%;
+  float: center;
 }
 
 button {
