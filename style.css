@@ -63,6 +63,7 @@ button:active {
 button {
   box-shadow: 0 5px #999;
   margin-top: -5px;
+  margin-bottom: 10px;
 }
 
 
