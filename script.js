@@ -1,6 +1,8 @@
 const tracks = [];
-const IDarr = ["https://dashcraft.io/?t=65ac62b6bfde41e9d30919dc", "https://dashcraft.io/?t=65ac5563bfde41e9d3090753", "https://dashcraft.io/?t=65e381918fb6a718f9a9410a", "https://dashcraft.io/?t=65f7a5d07bb0068befad371d", "https://dashcraft.io/?t=65f7aed67bb0068befad413b", "https://dashcraft.io/?t=65f7d7557bb0068befad8562", "https://dashcraft.io?t=65fe36fbd624bd26b4d39528", "https://dashcraft.io/?t=65f860427bb0068befaf06f7", "https://dashcraft.io/?t=65f869ed7bb0068befaf252e", "https://dashcraft.io/?t=65f88ec47bb0068befaf95cc", "https://dashcraft.io?t=65ff075dd624bd26b4d59937", "https://dashcraft.io/?t=65f7b8047bb0068befad4f9c", "https://dashcraft.io/?t=65f8a1857bb0068befafcabd", "https://dashcraft.io/?t=65f905f77bb0068befb0a4ca", "https://dashcraft.io/?t=65f9fb137bb0068befb39a83", "https://dashcraft.io/?t=65fa1fcc7bb0068befb3e8fd", "https://dashcraft.io/?t=65fa23e37bb0068befb3f093", "https://dashcraft.io?t=65fcf765d624bd26b4ce7381", "https://dashcraft.io/?t=65fcf5bed624bd26b4ce7165", "https://dashcraft.io/?t=65fdc9f1d624bd26b4d24e1b"];
-const mappers = ["PhantomInfinity", "PhantomInfinity", "PhantomInfinity", "PhantomInfinity", "PhantomInfinity", "Zingman", "PhantomInfinity", "C32ardash", "C32ardash", "Zingman", "PhantomInfinity", "PhantomInfinity", "C32ardash", "PhantomInfinity", "Zingman", "PhantomInfinity", "PhantomInfinity", "PhantomInfinity", "SoftReset", "Zingman"]
+const IDarr = ["https://dashcraft.io/?t=6636900ce52a0be7b6978e15", "https://dashcraft.io?t=66369f1ee52a0be7b697d002", "https://dashcraft.io?t=6636b21ee52a0be7b69840f5", "https://dashcraft.io?t=6636c85ee52a0be7b698a24e", "https://dashcraft.io?t=6636c8ede52a0be7b698a520", "https://dashcraft.io?t=6636cc1de52a0be7b698b0a4", "https://dashcraft.io?t=6636cd39e52a0be7b698b4bb", "https://dashcraft.io/?t=6636a124e52a0be7b697da65", "https://dashcraft.io/?t=665f803d5b98a760ebae94b5", "https://dashcraft.io?t=6636f7f4e52a0be7b6995e73", "https://dashcraft.io/?t=6636eb7ee52a0be7b6992d6e", "https://dashcraft.io/?t=663797fae52a0be7b69c9791", "https://dashcraft.io?t=6637fe91e52a0be7b69eb389", "https://dashcraft.io?t=663800c7e52a0be7b69ebab7", "https://dashcraft.io?t=663841f2e52a0be7b69fb284", "https://dashcraft.io/?t=66383655e52a0be7b69f90c8", "https://dashcraft.io/?t=66394b82e52a0be7b6a60948", "https://dashcraft.io?t=66418ebbe52a0be7b6ce2b04", "https://dashcraft.io?t=6642ca51e52a0be7b6d4304d", "https://dashcraft.io?t=663ae214e52a0be7b6adbfdf", "https://dashcraft.io?t=666b390e5b98a760ebdf8494", "https://dashcraft.io/?t=665f741d5b98a760ebae6e4d", "https://dashcraft.io?t=666b0d435b98a760ebde8797", "https://dashcraft.io/?t=666b372c5b98a760ebdf7c74", "https://dashcraft.io?t=6652653c59adfc382f77ddfc", "https://dashcraft.io/?t=66609b4f5b98a760ebb31966", "https://dashcraft.io?t=6660af995b98a760ebb381ab", "https://dashcraft.io/?t=6661d7d75b98a760ebb81016", "https://dashcraft.io/?t=6660f7d75b98a760ebb4715b", "https://dashcraft.io/?t=6667a1ea5b98a760ebd1b777"];
+const mappers = ["gornaz", "PhantomInfinity", "PhantomInfinity", "PhantomInfinity", "PhantomInfinity", "PhantomInfinity", "PhantomInfinity", "gornaz", "foxy", "PhantomInfinity", "GribGribReal", "Orang", "PhantomInfinity", "PhantomInfinity", "PhantomInfinity", "f0xy_god", "f0xy_god", "PhantomInfinity", "PhantomInfinity", "dusty", "f0xy_god", "Orang", "PhantomInfinity", "f0xy_god", "PhantomInfinity", "Axret", "dusty", "axret", "Nebbie", "SmiSh"]
+const overrides = [{ map: 1, override: [] }, { map: 2, override: [] }, { map: 3, override: [] }, { map: 4, override: [] }, { map: 5, override: [] }, { map: 6, override: [] }, { map: 7, override: [] }, { map: 8, override: [] }, { map: 9, override: [] }, { map: 10, override: [] }, { map: 11, override: [] }, { map: 12, override: [] }, { map: 13, override: [] }, { map: 14, override: [] }, { map: 15, override: [] }, { map: 16, override: [] }, { map: 17, override: [] }, { map: 18, override: [] }, { map: 19, override: [] }, { map: 20, override: [] }, { map: 21, override: [] }, { map: 22, override: [] }, { map: 23, override: [] }, { map: 24, override: [] }, { map: 25, override: [] }, { map: 26, override: [] }, { map: 27, override: [] }, { map: 28, override: [] }, { map: 29, override: [] }, { map: 30, override: [] }]
+console.log(overrides)
 const numbers = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th"]
 const leagues = ["Bronze 1", "Bronze 2", "Bronze 3", "Silver 1", "Silver 2", "Silver 3", "Gold 1", "Gold 2", "Gold 3", "Diamond"]
 const points = []
@@ -109,7 +111,9 @@ function playerLookup() {
     for (let j = 0; j < tracks[i].leaderboard.length; j++) {
       if ((tracks[i].leaderboard[j].user.username).includes(document.getElementById("player").value)) {
         if (!players.find(({ username }) => username === tracks[i].leaderboard[j].user.username)) {
-          players.push(tracks[i].leaderboard[j].user)
+          if (tracks[i].leaderboard[j].user.levelData.level > 0) {
+            players.push(tracks[i].leaderboard[j].user)
+          }
         }
       }
     }
@@ -125,7 +129,7 @@ function playerLookup() {
     link.innerHTML = "No players found"
   }
   if (players.length == 1) {
-    
+
     link.innerHTML += "Level " + players[0].levelData.level + " (" + players[0].levelData.xpInLevel + "/" + players[0].levelData.totalXpInLevel + ")"
     link.innerHTML += "<br>" + leagues[players[0].leagueNr]
   }
@@ -188,10 +192,13 @@ function getPositions(player) {
       totals.position += positions[positions.length - 1].position
       totals.tracks += 1
     } else {
+      if (overrides[i].override.includes(player.username)) {
+        positions.push({ position: 10.5, mapper: tracks[i].user.username, link: "https://dashcraft.io/?t=" + tracks[i]._id, wr: tracks[i].leaderboard[0].time, time: 50000 })
+      }
       if (tracks[i].leaderboard.length > -0) {
-        positions.push({ position: 11 , mapper: tracks[i].user.username, link: "https://dashcraft.io/?t=" + tracks[i]._id, wr: tracks[i].leaderboard[0].time, time: 100000 })
+        positions.push({ position: 11, mapper: tracks[i].user.username, link: "https://dashcraft.io/?t=" + tracks[i]._id, wr: tracks[i].leaderboard[0].time, time: 100000 })
       } else {
-        positions.push({ position: 11 , mapper: tracks[i].user.username, link: "https://dashcraft.io/?t=" + tracks[i]._id, wr: 0, time: 100000 })
+        positions.push({ position: 11, mapper: tracks[i].user.username, link: "https://dashcraft.io/?t=" + tracks[i]._id, wr: 0, time: 100000 })
       }
     }
   }
@@ -207,6 +214,8 @@ function getPositions(player) {
   for (let i = 0; i < positions.length; i++) {
     if (positions[i].position == 11) {
       html += "<br><a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: Not top 10"
+    } else if (positions[i].position == 10.5) {
+      html += "<br><a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: unknown (overriden)"
     } else {
       html += "<br><a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: " + numbers[positions[i].position - 1] + " place ("
       if (positions[i].position == 1) {
@@ -220,11 +229,14 @@ function getPositions(player) {
 
 function countPoints() {
   for (let i = 0; i < tracks.length; i++) {
+    for (let j = 0; j < overrides[i].override.length; j++) {
+      tracks[i].leaderboard.push({ user: { username: overrides[i].override[j], levelData: { level: 0, xpInLevel: 0, leagueNr: 0 }, time: 100000 } })
+    }
     for (let j = 0; j < tracks[i].leaderboard.length; j++) {
       if (points.find(({ username }) => username === tracks[i].leaderboard[j].user.username) != undefined) {
-        points.find(({ username }) => username === tracks[i].leaderboard[j].user.username).points += (1 - j/1000);
+        points.find(({ username }) => username === tracks[i].leaderboard[j].user.username).points += (1 - j / 1000);
       } else {
-        points.push({ username: tracks[i].leaderboard[j].user.username, points: (1 - j/1000) });
+        points.push({ username: tracks[i].leaderboard[j].user.username, points: (1 - j / 1000) });
       }
     }
   }
