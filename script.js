@@ -188,10 +188,10 @@ function getPositions(player) {
       totals.position += positions[positions.length - 1].position
       totals.tracks += 1
     } else {
-      if (tracks[i].leaderboard.length > 0) {
+      if (tracks[i].leaderboard.length > -0) {
         positions.push({ position: 11 , mapper: tracks[i].user.username, link: "https://dashcraft.io/?t=" + tracks[i]._id, wr: tracks[i].leaderboard[0].time, time: 100000 })
       } else {
-        
+        positions.push({ position: 11 , mapper: tracks[i].user.username, link: "https://dashcraft.io/?t=" + tracks[i]._id, wr: 0, time: 100000 })
       }
     }
   }
