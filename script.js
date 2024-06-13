@@ -5,11 +5,11 @@ const overrides = [{ map: 1, override: [] }, { map: 2, override: [] }, { map: 3,
 console.log(overrides)
 const numbers = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th"]
 const leagues = ["Bronze 1", "Bronze 2", "Bronze 3", "Silver 1", "Silver 2", "Silver 3", "Gold 1", "Gold 2", "Gold 3", "Diamond"]
-const points = []
+let points = []
 
 for (let i = 0; i < IDarr.length; i++) {
   IDarr[i] = IDarr[i].slice(IDarr[i].length - 24, IDarr[i].length)
-  document.getElementById("tracks").innerHTML += "<a href=https://dashcraft.io/?t=" + IDarr[i] + " target='_blank'>https://dashcraft.io/?t=" + IDarr[i] + "</a> by " + mappers[i] + "<br>";
+  document.getElementById("tracks").innerHTML += "#" + (i+1) + ": <a href=https://dashcraft.io/?t=" + IDarr[i] + " target='_blank'>https://dashcraft.io/?t=" + IDarr[i] + "</a> by " + mappers[i] + "<br>";
 }
 
 
