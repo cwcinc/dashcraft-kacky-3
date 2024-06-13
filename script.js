@@ -9,7 +9,7 @@ const points = []
 
 for (let i = 0; i < IDarr.length; i++) {
   IDarr[i] = IDarr[i].slice(IDarr[i].length - 24, IDarr[i].length)
-  document.getElementById("tracks").innerHTML += "<a href=https://dashcraft.io/?t=" + IDarr[i] + ">https://dashcraft.io/?t=" + IDarr[i] + "</a> by " + mappers[i] + "<br>";
+  document.getElementById("tracks").innerHTML += "<a href=https://dashcraft.io/?t=" + IDarr[i] + " target='_blank'>https://dashcraft.io/?t=" + IDarr[i] + "</a> by " + mappers[i] + "<br>";
 }
 
 
