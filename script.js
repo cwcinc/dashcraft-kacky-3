@@ -55,7 +55,9 @@ function retrieveMaps() {
 
 
 function getInfo() {
+  document.getElementById("leaderboard").innerHTML = "<h2>Leaderboard</h2>"
   document.getElementById("data").hidden = false
+  points = []
 
   var fetches = []
   for (let i = 0; i < IDarr.length; i++) {
