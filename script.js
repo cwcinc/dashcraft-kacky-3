@@ -218,15 +218,19 @@ function getPositions(player) {
   var html = "Total time: " + totals.time + "<br>Average position: " + totals.position / totals.tracks + "<br>"
   for (let i = 0; i < positions.length; i++) {
     if (positions[i].position == 11) {
-      html += "<br><a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: Not top 10"
+      html += "<br>#" + (IDarr.findIndex((hi) => hi == positions[i].link.slice(positions[i].link.length - 24, positions[i].link.length)) + 1) + ": <a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: Not top 10"
     } else if (positions[i].position == 10.5) {
-      html += "<br><a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: unknown (overriden)"
+      html += "<br>#" + (IDarr.findIndex((hi) => hi == positions[i].link.slice(positions[i].link.length - 24, positions[i].link.length)) + 1) + ": <a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: unknown (overriden)"
     } else {
-      html += "<br><a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: " + numbers[positions[i].position - 1] + " place ("
+      html += "<br>#" + (IDarr.findIndex((hi) => hi == positions[i].link.slice(positions[i].link.length - 24, positions[i].link.length)) + 1) + ": <a href='" + positions[i].link + "' target='_blank'>" + positions[i].mapper + "</a>'s track: " + numbers[positions[i].position - 1] + " place ("
       if (positions[i].position == 1) {
         html += "Holds world record)"
       } else
         html += (Math.round((positions[i].time - positions[i].wr) * 10000) / 10000) + " seconds away from world record)"
+    }
+
+    if (positions[i].wr == 0) {
+      html += " (unfinished)"
     }
   }
   return html
