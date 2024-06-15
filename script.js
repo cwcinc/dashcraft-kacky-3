@@ -277,11 +277,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!startTime) startTime = timestamp;
         const elapsed = timestamp - startTime;
 
-        const speed = 0.001;
-        const amplitude = 50;
+        const speed = 0.0001;
+        const amplitude = 100;
 
-        const x = amplitude * Math.sin(speed * elapsed);
-        const y = amplitude * Math.cos(speed * elapsed);
+        const x = amplitude * Math.sin(speed * elapsed) - 200;
+        const y = amplitude * Math.cos(speed * elapsed) - 200;
 
         background.style.transform = `translate(${x}px, ${y}px)`;
 
