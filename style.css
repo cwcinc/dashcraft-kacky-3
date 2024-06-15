@@ -3,6 +3,10 @@ html {
   width: 100%;
 }
 
+.tracks {
+  white-space: pre-wrap;
+}
+
 body {
   text-align: center;
   background-image: url("background.png");
