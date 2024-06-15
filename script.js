@@ -244,7 +244,7 @@ function countPoints() {
     }
     for (let j = 0; j < tracks[i].leaderboard.length; j++) {
       if (banlist.includes(tracks[i].leaderboard[j].user._id)) {
-        tracks[i].leaderboard.splice(j, j+1)
+        tracks[i].leaderboard.splice(j, 1)
         j -= 1
       } else if (points.find(({ username }) => username === tracks[i].leaderboard[j].user.username) != undefined) {
         points.find(({ username }) => username === tracks[i].leaderboard[j].user.username).points += (1 - j / 1000);
