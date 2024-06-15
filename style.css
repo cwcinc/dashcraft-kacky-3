@@ -27,7 +27,7 @@ body, html {
     left: 0;
     width: 200%;
     height: 200%;
-    background: url('background.png') no-repeat;
+    background: url('background.jpg') no-repeat;
     background-size: 150%;
     z-index: -1;
 }
