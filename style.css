@@ -14,6 +14,13 @@ body {
   text-align: center;
 }
 
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
 .background {
     position: absolute;
     top: 0;
@@ -22,6 +29,7 @@ body {
     height: 200%;
     background: url('background.png') no-repeat;
     background-size: cover;
+    z-index: -1;
 }
 
 hr {
