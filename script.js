@@ -7,6 +7,28 @@ const numbers = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", 
 const leagues = ["Bronze 1", "Bronze 2", "Bronze 3", "Silver 1", "Silver 2", "Silver 3", "Gold 1", "Gold 2", "Gold 3", "Diamond"]
 let points = []
 
+document.addEventListener('DOMContentLoaded', function() {
+    const background = document.querySelector('.background');
+    let startTime = null;
+
+    function sineWave(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+
+        const speed = 0.001;
+        const amplitude = 50;
+
+        const x = amplitude * Math.sin(speed * elapsed);
+        const y = amplitude * Math.cos(speed * elapsed);
+
+        background.style.transform = `translate(${x}px, ${y}px)`;
+
+        requestAnimationFrame(sineWave);
+    }
+
+    requestAnimationFrame(sineWave);
+});
+
 for (let i = 0; i < IDarr.length; i++) {
   IDarr[i] = IDarr[i].slice(IDarr[i].length - 24, IDarr[i].length);
   document.getElementById("tracks").innerHTML += ("#" + (i+1) + ":").padEnd(5) + "<a href=https://dashcraft.io/?t=" + IDarr[i] + " target='_blank'>" + ("https://dashcraft.io/?t=" + IDarr[i] + "</a>") "  by " + mappers[i] + "<br>";
