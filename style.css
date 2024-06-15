@@ -12,7 +12,16 @@ html {
 
 body {
   text-align: center;
-  background-image: url("background.png");
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: url('background.png') no-repeat;
+    background-size: cover;
 }
 
 hr {
