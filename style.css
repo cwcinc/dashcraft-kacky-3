@@ -5,6 +5,8 @@ html {
 
 .tracks {
   white-space: pre-wrap;
+  margin-left: 25%;
+  text-align: left;
 }
 
 body {
